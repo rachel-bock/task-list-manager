@@ -3,19 +3,22 @@ const newTodoAddButtonEl = document.getElementById("add-todo");
 const filterAllButtonEl = document.getElementById("filter-all");
 const filterNotDoneButtonEl = document.getElementById("filter-not-done");
 const filterDoneButtonEl = document.getElementById("filter-done");
-let todoList[];
+let todoList = [];
+let nextId = 0;
 
 newTodoAddButtonEl.addEventListener("click", function () {
-  if(newTodoInputEl !== ""){
+  if (newTodoInputEl !== "") {
     addTodo(newTodoInputEl.value);
+    newTodoInputEl.value = "";
   }
 });
 
-function addTodo(content){
+function addTodo(content) {
   todoList.push({
     content: content,
-    id: nextId++
-  })
+    id: nextId++,
+    isComplete: false
+  });
 }
 
 filterAllButtonEl.addEventListener("click", function () {});
