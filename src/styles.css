@@ -25,6 +25,7 @@ button:active,
 button:focus,
 button:hover {
   border: 3px solid black;
+  border-radius: 0px;
 }
 
 input[type="text"] {
@@ -36,7 +37,7 @@ input[type="text"] {
   font-family: sans-serif;
 }
 ul {
-  margin: 0;
+  margin: 1rem 0 0 0;
   padding: 0;
   list-style: none;
 }
