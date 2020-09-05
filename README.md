@@ -1,2 +1,4 @@
 # task-list-manager
-Created with CodeSandbox
+
+Task List Manager Project by Rachel Bock
+Project Created 9/4/2020
