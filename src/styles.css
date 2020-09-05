@@ -4,3 +4,8 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.new-todo-group {
+  margin-bottom: 1rem;
+}
+.filter-button-group {
+}
