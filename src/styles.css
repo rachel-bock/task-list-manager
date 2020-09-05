@@ -8,6 +8,8 @@ body {
   margin-bottom: 1rem;
 }
 .filter-button-group {
+  border: 1px solid black;
+  padding: 10px;
 }
 
 button {
@@ -15,10 +17,23 @@ button {
   cursor: pointer;
   background-color: rgb(121, 230, 230);
   border: 3px solid rgb(121, 230, 230);
+  font-size: 1rem;
+  border-radius: 5px;
 }
 
 button:active,
 button:focus,
 button:hover {
   border: 3px solid black;
+}
+
+input[type="text"] {
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.filters-label {
+  font-family: sans-serif;
+}
+ul {
 }
