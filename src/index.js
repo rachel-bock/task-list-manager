@@ -4,9 +4,18 @@ const filterAllButtonEl = document.getElementById("filter-all");
 const filterNotDoneButtonEl = document.getElementById("filter-not-done");
 const filterDoneButtonEl = document.getElementById("filter-done");
 const todoListEl = document.getElementById("todo-list");
+const storageKey = "learn-web_todo-app";
 let todoList = [];
 let nextId = 0;
 let filter = "none";
+
+try {
+  const savedList = localStorage.getItem(storageKey);
+  if (savedList !== null) {
+    todoList = JSON.parse(savedList);
+    drawTodos();
+  }
+} catch (error) {}
 
 newTodoAddButtonEl.addEventListener("click", function () {
   if (newTodoInputEl !== "") {
@@ -22,6 +31,7 @@ function addTodo(content) {
     id: nextId++,
     isComplete: false
   });
+  localStorage.setItem(storageKey, JSON.stringify(todoList));
   drawTodos();
 }
 
@@ -56,6 +66,7 @@ function drawTodos() {
           }
           return task;
         });
+        localStorage.setItem(storageKey, JSON.stringify(todoList));
         drawTodos();
       });
 
