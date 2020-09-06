@@ -37,8 +37,14 @@ function drawTodos() {
     if (todo.isComplete) {
       checkboxEl.setAttribute("checked", todo.isComplete);
     }
-    checkboxEl.addEventListener("change", function () {
-      todolist = todolist.map(function (todo) {});
+    checkboxEl.addEventListener("click", function () {
+      todoList = todoList.map(function (task) {
+        if (task.id === todo.id) {
+          task.iscomplete = !task.iscomplete;
+        }
+        return task;
+      });
+      drawTodos();
     });
 
     spanEl.innerText = todo.content;
