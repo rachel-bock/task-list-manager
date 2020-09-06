@@ -6,6 +6,7 @@ const filterDoneButtonEl = document.getElementById("filter-done");
 const todoListEl = document.getElementById("todo-list");
 let todoList = [];
 let nextId = 0;
+let filter = "none";
 
 newTodoAddButtonEl.addEventListener("click", function () {
   if (newTodoInputEl !== "") {
@@ -27,39 +28,59 @@ function addTodo(content) {
 function drawTodos() {
   todoListEl.innerHTML = "";
 
-  todoList.forEach(function (todo) {
-    const listItemEl = document.createElement("li");
-    const labelEl = document.createElement("label");
-    const checkboxEl = document.createElement("input");
-    const spanEl = document.createElement("span");
+  todoList
+    .filter(function () {
+      switch (filter) {
+        case "done":
+          return todo.isComplete;
+        case "not-done":
+          return !todo.iscomplete;
+        default:
+          return true;
+      }
+    })
+    .forEach(function (todo) {
+      const listItemEl = document.createElement("li");
+      const labelEl = document.createElement("label");
+      const checkboxEl = document.createElement("input");
+      const spanEl = document.createElement("span");
 
-    checkboxEl.setAttribute("type", "checkbox");
-    if (todo.isComplete) {
-      checkboxEl.setAttribute("checked", todo.isComplete);
-    }
-    checkboxEl.addEventListener("click", function () {
-      todoList = todoList.map(function (task) {
-        if (task.id === todo.id) {
-          task.iscomplete = !task.iscomplete;
-        }
-        return task;
+      checkboxEl.setAttribute("type", "checkbox");
+      if (todo.isComplete) {
+        checkboxEl.setAttribute("checked", todo.isComplete);
+      }
+      checkboxEl.addEventListener("click", function () {
+        todoList = todoList.map(function (task) {
+          if (task.id === todo.id) {
+            task.iscomplete = !task.iscomplete;
+          }
+          return task;
+        });
+        drawTodos();
       });
-      drawTodos();
+
+      spanEl.innerText = todo.content;
+
+      labelEl.appendChild(checkboxEl);
+      labelEl.appendChild(spanEl);
+
+      listItemEl.appendChild(labelEl);
+
+      todoListEl.appendChild(listItemEl);
     });
-
-    spanEl.innerText = todo.content;
-
-    labelEl.appendChild(checkboxEl);
-    labelEl.appendChild(spanEl);
-
-    listItemEl.appendChild(labelEl);
-
-    todoListEl.appendChild(listItemEl);
-  });
 }
 
-filterAllButtonEl.addEventListener("click", function () {});
+filterAllButtonEl.addEventListener("click", function () {
+  filter = "none";
+  drawTodos();
+});
 
-filterNotDoneButtonEl.addEventListener("click", function () {});
+filterNotDoneButtonEl.addEventListener("click", function () {
+  filter = "not-done";
+  drawTodos();
+});
 
-filterDoneButtonEl.addEventListener("click", function () {});
+filterDoneButtonEl.addEventListener("click", function () {
+  filter = "done";
+  drawTodos();
+});
